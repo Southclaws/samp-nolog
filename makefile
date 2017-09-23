@@ -26,7 +26,8 @@ clean:
 indocker:
 	docker run \
 		-it \
-		--entrypoint "git" \
-		-v $(shell pwd):/root \
+		--entrypoint "make" \
+		-w '//root' \
+		-v '//d/Projects/samp-nolog:/root' \
 		maddinat0r/debian-samp \
-		clone https://github.com/Southclaws/samp-nolog.git
+		all
