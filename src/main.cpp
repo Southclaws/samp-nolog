@@ -22,6 +22,7 @@
 ==============================================================================*/
 
 #include <unistd.h> // pagesize
+#include <sys/mman.h>
 #include <sdk.hpp>
 #include "main.hpp"
 
