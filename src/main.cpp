@@ -21,6 +21,7 @@
 
 ==============================================================================*/
 
+#include <unistd.h> // pagesize
 #include <sdk.hpp>
 #include "main.hpp"
 
@@ -29,7 +30,9 @@ logprintf_t logprintf_fp;
 
 PLUGIN_EXPORT bool PLUGIN_CALL Load(void **ppData)
 {
-	logprintf_fp = (logprintf_t)ppData[PLUGIN_DATA_LOGPRINTF];
+	void *plogprintf = ppData[PLUGIN_DATA_LOGPRINTF];
+	mprotect((((uint32_t)plogprintf) / getpagesize()) * getpagesize(), 1, PROT_READ | PROT_WRITE | PROT_EXEC);
+	*(unsigned char *)(plogprintf) = 0xC3;
 
 	return true;
 }

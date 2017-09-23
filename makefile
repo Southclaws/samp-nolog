@@ -22,3 +22,11 @@ all: $(OUTFILE)
 
 clean:
 	-rm build/*.o *.so
+
+indocker:
+	docker run \
+		-it \
+		--entrypoint "git" \
+		-v $(shell pwd):/root \
+		maddinat0r/debian-samp \
+		clone https://github.com/Southclaws/samp-nolog.git
