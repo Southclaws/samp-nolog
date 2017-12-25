@@ -1,0 +1,12 @@
+{
+    "entry": "",
+    "output": "",
+    "resources": [
+        {
+            "name": "nolog.tar.gz",
+            "platform": "linux",
+            "archive": true,
+            "plugins": ["nolog.so"]
+        }
+    ]
+}
