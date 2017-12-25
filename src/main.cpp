@@ -1,11 +1,11 @@
 #include <sys/mman.h>
 #include <unistd.h>
 
-#include "main.hpp"
 #include <plugincommon.h>
 
-extern void* pAMXFunctions;
+#include "main.hpp"
 
+extern void* pAMXFunctions;
 
 PLUGIN_EXPORT bool PLUGIN_CALL Load(void** ppData)
 {
