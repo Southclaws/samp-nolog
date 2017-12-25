@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <sys/mman.h>
 #include <unistd.h>
 
@@ -9,12 +10,12 @@ extern void* pAMXFunctions;
 
 PLUGIN_EXPORT bool PLUGIN_CALL Load(void** ppData)
 {
-    void* plogprintf = ppData[PLUGIN_DATA_LOGPRINTF];
-    uint32_t offset = ((uint32_t)plogprintf + 0x3B) / getpagesize();
+    uint32_t ptr = (uint32_t)ppData[PLUGIN_DATA_LOGPRINTF];
+    uint32_t offset = (ptr + 0x3B);
 
-    mprotect((void*)(offset * getpagesize()), 1, PROT_READ | PROT_WRITE | PROT_EXEC);
+    mprotect((void*)((offset / getpagesize()) * getpagesize()), 1, PROT_READ | PROT_WRITE | PROT_EXEC);
 
-    *(unsigned char*)(plogprintf + 0x3B) = 0x75;
+    *(unsigned char*)offset = 0x75;
 
     return true;
 }

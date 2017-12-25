@@ -1,10 +1,10 @@
 GPP = g++
 OUTFILE = nolog.so
 
-SDK_DIR = src/sdk
+SDK_DIR = lib/samp-plugin-sdk
 
-COMPILE_FLAGS = -fpermissive -pthread -fPIC -m32 -std=c++11 -c -O3 -w -ggdb -D LINUX
-LINK_FLAGS = -Wl,--no-undefined -pthread -O2 -m32 -fshort-wchar -shared
+COMPILE_FLAGS = -fpermissive -fPIC -m32 -std=c++11 -c -O3 -w -ggdb -D LINUX
+LINK_FLAGS = -W -O2 -m32 -fshort-wchar -shared
 
 
 build/amxplugin.o: $(SDK_DIR)/amxplugin.cpp
@@ -28,6 +28,11 @@ indocker:
 		-it \
 		--entrypoint "make" \
 		-w '//root' \
-		-v '//d/Projects/samp-nolog:/root' \
+		-v '/$(shell pwd):/root' \
 		maddinat0r/debian-samp \
 		all
+
+runtest:
+	cp nolog.so test/plugins/nolog.so
+	sampctl package build --forceEnsure --dir test
+	sampctl server run --dir test --container

@@ -1,0 +1,8 @@
+{
+    "gamemodes": ["test"],
+    "plugins": ["nolog"],
+    "rcon_password": "./QiFy190/?!",
+    "port": 7777,
+    "hostname": "test",
+    "maxplayers": 32
+}

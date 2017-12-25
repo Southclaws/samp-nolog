@@ -1,0 +1,7 @@
+{
+    "user": "Southclaws",
+    "repo": "nolog-test",
+    "entry": "gamemodes/test.pwn",
+    "output": "gamemodes/test.amx",
+    "dependencies": ["Southclaws/samp-stdlib"]
+}
