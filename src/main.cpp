@@ -1,16 +1,19 @@
-#include <stdint.h>
-#include <sys/mman.h>
-#include <unistd.h>
+#include <iostream>
 
 #include <plugincommon.h>
 #include <subhook.h>
 
 extern void* pAMXFunctions;
 
+void logprintf(char* fmt, ...) {
+    // todo: format output
+    std::cout << fmt << std::endl;
+}
+
 PLUGIN_EXPORT bool PLUGIN_CALL Load(void** ppData)
 {
-    uint32_t ptr = (uint32_t)ppData[PLUGIN_DATA_LOGPRINTF];
-    subhook_new(ptr, nullptr, nullptr);
+    void* ptr = ppData[PLUGIN_DATA_LOGPRINTF];
+    subhook_new(ptr, (void *)logprintf, (subhook_options_t)0);
     // uint32_t offset = (ptr + 0x3B);
 
     // mprotect((void*)((offset / getpagesize()) * getpagesize()), 1, PROT_READ | PROT_WRITE | PROT_EXEC);
