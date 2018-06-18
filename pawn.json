@@ -1,12 +1,11 @@
 {
-    "entry": "",
-    "output": "",
-    "resources": [
-        {
-            "name": "nolog.tar.gz",
-            "platform": "linux",
-            "archive": true,
-            "plugins": ["nolog.so"]
-        }
-    ]
+  "user": "username",
+  "repo": "projectname",
+  "entry": "test.pwn",
+  "output": "test/gamemodes/test.amx",
+  "dependencies": ["Southclaws/samp-stdlib"],
+  "dev_dependencies": ["pawn-lang/YSI-Includes"],
+  "runtime": {
+    "plugins": ["username/projectname"]
+  }
 }
