@@ -12,11 +12,6 @@ add_samp_plugin(projectname
 	${SAMPSDK_DIR}/amxplugin.cpp
 	${SAMPSDK_DIR}/amxplugin2.cpp
 	${SAMPSDK_DIR}/amx/getch.c
-	common.hpp
 	main.cpp
-	impl.cpp
-	impl.hpp
-	natives.cpp
-	natives.hpp
 	plugin.def
 )
