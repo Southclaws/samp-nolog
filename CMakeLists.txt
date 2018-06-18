@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(projectname)
+project(nolog)
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/lib/cmake-modules")
 
