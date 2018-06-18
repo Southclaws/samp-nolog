@@ -8,10 +8,11 @@ include_directories(
 	${SAMPSDK_INCLUDE_DIR}
 )
 
-add_samp_plugin(projectname
+add_samp_plugin(nolog
 	${SAMPSDK_DIR}/amxplugin.cpp
 	${SAMPSDK_DIR}/amxplugin2.cpp
 	${SAMPSDK_DIR}/amx/getch.c
 	main.cpp
 	plugin.def
 )
+target_link_libraries(nolog subhook)
