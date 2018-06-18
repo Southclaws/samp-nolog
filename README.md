@@ -2,9 +2,10 @@
 
 This is a Linux only plugin for SA:MP that blocks logging to `server_log.txt`.
 
-It was pretty much written by MyU since my C++ is very rusty (no pun intended).
+It uses Zeex/subhook to hook `logprintf` and redirect it to a function that does
+the `printf` without the `log`.
 
-## Why?
+## Why
 
 Why would you want to block logging to `server_log.txt`?
 
@@ -23,36 +24,24 @@ the main thread.
 With this plugin loaded, all your output comes out of STDOUT and you can do as
 you please with it:
 
-- send to local or remote syslog
-- let a parent application (such as
-  [sampctl](https://github.com/Southclaws/sampctl)) capture it and send it
-  somewhere
-- send it to Elasticsearch for fast searching
+- use [maddinat0r/samp-log](https://github.com/maddinat0r/samp-log)
+- send to a logging service (see below)
 - watch for "error", "warning", "debug" and send an Email or Discord message to
   alert your team to issues
 - pipe it to /dev/null and live life on the edge
 
-## Demo/Test
+### Logging Services
 
-To check out the plugin in action, run `make runtest` if you have Make
-available.
+Logging is important and there are entire infrastructures dedicated to handling
+application logs. SA:MP can take advantage of these tools too.
 
-If you're on Windows and don't have Make installed, run this:
+For the oldschool sysadmins, syslog is probably what you are used to. Since
+SA:MP outputs via stdout, you can easily set up a standard systemd unit file and
+use journald to manage your logs.
 
-```powershell
-cp nolog.so test\plugins\nolog.so
-sampctl package build --forceEnsure --dir test
-sampctl server run --dir test --container
-```
+If you're interested in accessing logs frequently for administration or market
+research purposes, I'd highly recommend the "ELK Stack". It gets the name from
+the technologies it uses: Elasticsearch, Logstash and Kibana.
 
-Requires sampctl and Docker to be installed.
-
-## Why Linux Only?
-
-Linux is the go-to production server, there are very few reasons to run a
-production server on Windows. Windows is largely used for development and you'll
-likely not care about the overhead of log files in a development environment.
-
-If you _do_ run a prod server on Windows and are still interested in blocking
-`server_log.txt` output, unfortunately I don't plan to work on a Windows version
-as I'm even entirely sure if it'll work the same way.
+An alternative to this would be using Prometheus and Grafana with a custom node
+exporter for SA:MP data.
