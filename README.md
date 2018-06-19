@@ -1,6 +1,6 @@
 # nolog
 
-This is a Linux only plugin for SA:MP that blocks logging to `server_log.txt`.
+This is a plugin for SA:MP that blocks logging to `server_log.txt`.
 
 It uses Zeex/subhook to hook `logprintf` and redirect it to a function that does
 the `printf` without the `log`.
@@ -8,6 +8,17 @@ the `printf` without the `log`.
 ## Why
 
 Why would you want to block logging to `server_log.txt`?
+
+### "Log Bleed" Vulnerability
+
+RCON can be used to read information being written to logs via a vulnerability
+in the existing `logprintf` implementation. This plugin protects you from this
+vulnerability.
+
+You should _never_ log sensitive information _anyway_ however logs being
+available to outsiders is still not desirable.
+
+### Engineering Reasons
 
 Because individual log files are not
 
@@ -30,7 +41,7 @@ you please with it:
   alert your team to issues
 - pipe it to /dev/null and live life on the edge
 
-### Logging Services
+#### Logging Services
 
 Logging is important and there are entire infrastructures dedicated to handling
 application logs. SA:MP can take advantage of these tools too.
